@@ -32,6 +32,7 @@ devtools::install_github("MichaelHoltonPrice/yada")
 # If necessary, install dplyr and ggplot2
 install.packages("dplyr")
 install.packages("ggplot2")
+install.packages("tidyr")
 ```
 
 ## Getting the code and input data
