@@ -727,7 +727,7 @@ long_df$freq <- as.numeric(long_df$freq)
 # Generate plot
 pdf(file.path(data_dir,"FigS4_Missing_data.pdf"))
   ggplot(long_df, aes(x=age_int, y=var)) + 
-    geom_title(aes(fill=(freq*100)), color="black") + coord_equal() + 
+    geom_tile(aes(fill=(freq*100)), color="black") + coord_equal() +
     theme_minimal() + scale_fill_gradient(low="white",high="dodgerblue4") + 
     labs(x="Age [years]", y="Variable", fill="% Available")
 dev.off()
@@ -752,7 +752,11 @@ for(j in 1:ncol(data_na)) {
   missing_df[1,j] <- pct*100
 }
 
-colnames(missing_vec) <- colnames(cp_df[4:9])
+colnames(missing_df) <- colnames(cp_df[4:9])
+
+# Write missing_df to file
+print("Frequency of missing data per response variable:")
+print(missing_df)
 
 # Close all clusters used for parallel processing
 stopImplicitCluster()
