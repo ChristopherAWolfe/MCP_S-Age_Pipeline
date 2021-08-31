@@ -687,7 +687,7 @@ for (j in 1:problem$mod_spec$J) {
   ord_ci_table <- generate_ord_ci(data_dir,
                                   analysis_name,
                                   j=j,
-                                  "HME_EF",
+                                  var_name,
                                   th_x,
                                   input_seed=seed_val,
                                   save_file=TRUE)
@@ -726,10 +726,12 @@ long_df$freq <- as.numeric(long_df$freq)
 
 # Generate plot
 pdf(file.path(data_dir,"FigS4_Missing_data.pdf"))
+print(
   ggplot(long_df, aes(x=age_int, y=var)) + 
     geom_tile(aes(fill=(freq*100)), color="black") + coord_equal() +
     theme_minimal() + scale_fill_gradient(low="white",high="dodgerblue4") + 
     labs(x="Age [years]", y="Variable", fill="% Available")
+)
 dev.off()
 
 ## Table S4
