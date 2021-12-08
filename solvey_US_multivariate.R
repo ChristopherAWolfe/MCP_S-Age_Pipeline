@@ -34,7 +34,7 @@ registerDoParallel(detectCores())
 # The data directory is /results
 data_dir <- "results"
 # The "ID" that uniquely identifies this analysis:
-analysis_name <- 'US'
+analysis_name <- "US"
 
 # A wrapper to define the problem and do the fit. The wrapper works for either
 # the main problem or a fold.
