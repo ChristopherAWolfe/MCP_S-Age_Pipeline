@@ -32,26 +32,15 @@ analysis_name <- 'US'
 
 
 # Perform multivariate model cross-validation using fold data
-fold_data_list <- list()
-num_folds <- get_num_training_problems(data_dir,analysis_name)
-for (fold in 1:num_folds) {
-  fold_data_list[[fold]] <- crossval_multivariate_models(data_dir,
-                                                         analysis_name,
-                                                         fold)
-}
-
-eta_cindep <-
-  sum(unlist(lapply(fold_data_list,
-                    function(fold_data){sum(fold_data$eta_vect_cindep)})))
-eta_cdep <-
-  sum(unlist(lapply(fold_data_list,
-                    function(fold_data){sum(fold_data$eta_vect_cdep)})))
+eval_list <- evaluate_multivariate_models(data_dir,
+                                         analysis_name,
+                                         eval_type="cv")
 
 # Return maximum likelihood estimations
 print(paste0("Out-of-sample negative log-likelihood for conditionally ",
-             "independent model: ",eta_cindep))
+             "independent model: ",eval_list$eval_cindep))
 print(paste0("Out-of-sample negative log-likelihood for conditionally ",
-             "dependent model: ",eta_cdep))
+             "dependent model: ",eval_list$eval_cdep))
 
 # Stop clusters from parallel processing
 stopImplicitCluster()
